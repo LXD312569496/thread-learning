@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk Integer.parseInt(project.COMPILE_SDK_VERSION)
+
+    defaultConfig {
+        minSdk Integer.parseInt(project.MIN_SDK_VERSION)
+        targetSdk Integer.parseInt(project.TARGET_SDK_VERSION)
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        pickFirst("**/libc++_shared.so")
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'com.google.android.material:material:1.1.0'
+
+    implementation ("com.facebook.flipper:flipper:0.121.0")
+    implementation ("com.facebook.soloader:soloader:0.10.4")
+
+    compileOnly project(":thread_hook")
+}
+
+
+apply from: rootProject.file("gradle/maven-publish.gradle")
+

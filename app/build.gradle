@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk Integer.parseInt(project.COMPILE_SDK_VERSION)
+
+    defaultConfig {
+        applicationId "com.example.threadlearning"
+        minSdk Integer.parseInt(project.MIN_SDK_VERSION)
+        targetSdk Integer.parseInt(project.TARGET_SDK_VERSION)
+        versionCode 1
+        versionName "1.0"
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
+
+    implementation project(":thread_hook")
+    implementation project(":thread_hook_flipper")
+    implementation project(":thread_dead_lock")
+
+//    implementation "com.github.LXD312569496.thread-learning:thread_hook:0.0.3"
+//    implementation "com.github.LXD312569496.thread-learning:thread_hook_flipper:0.0.3"
+//    implementation "com.github.LXD312569496.thread-learning:thread_dead_lock:0.0.3"
+
+}
